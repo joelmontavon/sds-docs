@@ -83,7 +83,7 @@ Body:
   "resourceType": "Patient"
 }
 ```
-3. To get the `Linkage` resources for all of a patient's partitions, first query for the `Linkage` resource for the authorized patient in the foreign partition. From the `Linkage` resource returned, identify the `Patient` reference for the local partition (with the `item` with `type` of "source" and `valueUrl` of "SDS-LOCAL"). Then, using the `Patient` reference in the local partition, query for the `Linkage` resources in the local partition.
+3. To get the `Linkage` resources for all of a patient's partitions, first query for the `Linkage` resource for the authorized patient in the foreign partition. From the `Linkage` resource returned, identify the `Patient` reference for the local partition (for the `item` with `type` of "source" and `valueUrl` of "SDS-LOCAL"). Then, using the `Patient` reference in the local partition, query for the `Linkage` resources in the local partition.
 
 ### Data Access (Read/Write):
 
