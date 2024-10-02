@@ -91,7 +91,7 @@ Reading and writing data to the SDS requires separate calls to each partition as
 
 Local Partition:
 
-To read or write to the local partition, identify the `Patient` reference for the local partition from the `Linkage` resource as described above. Include the `Patient` reference for the local partition as a query parameter for a GET request (e.g., GET http://localhost:8080/fhir/Observation?patient=Patient/a210436a-f32b-4a6d-b924-efb01920b40e) or in the request body for a POST or PUT request. Always include the Authorization header in the request. And, for GET requests, include the Accept header. For POST requests, include the Content-Type header and the JSON resource body. These requests should never include the `X-Partition-Name` header.
+To read or write to the local partition, identify the `Patient` reference for the local partition from the `Linkage` resource as described above. Include the `Patient` reference for the local partition as a query parameter for a GET request (e.g., GET http://localhost:8080/fhir/Observation?patient=Patient/a210436a-f32b-4a6d-b924-efb01920b40e) or in the request body for a POST or PUT request. Always include the `Authorization` header in the request. And, for GET requests, include the `Accept` header. For POST requests, include the `Content-Type` header and the JSON resource body. These requests should never include the `X-Partition-Name` header.
 ###### Example:
 GET http://localhost:8080/fhir/Linkage?item=Patient/a210436a-f32b-4a6d-b924-efb01920b40e
 |Header|Value|Notes|
