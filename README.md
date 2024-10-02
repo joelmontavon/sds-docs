@@ -13,7 +13,7 @@ The SDS is built upon a HAPI FHIR server (version 6.10.1) with a PostgreSQL data
 ## Resources
 
 ### Extending the Linkage Resource
-`Linkage` resources use extensions to identify the partition for each `reference`. From the `Linkage` resource, the `item` with a type of "source" is used for reading from and writing to the local partition. In the  example below, the `item` with `type` of "source" and `valueUrl` of "SDS-LOCAL" refers to the local partition, while the `item` with `type` of "alternate" and `vauleUrl` of "https://example.org/fhir" refers to the foreign partition.
+In the `Linkage` resources, extensions are used to identify the partition. The `item` with a type of "source" is used for reading from and writing to the local partition. In the example below, the `item` with `type` of "source" and `valueUrl` of "SDS-LOCAL" refers to the local partition, while the `item` with `type` of "alternate" and `vauleUrl` of "https://example.org/fhir" refers to the foreign partition.
 
 ##### Example
 ```json
