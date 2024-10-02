@@ -190,7 +190,7 @@ Body:
             "valueBoolean": true
         },
         {
-            "name": "expungePreviousVersion",
+            "name": "expungePreviousVersions",
             "valueString": true
         }
     ]
