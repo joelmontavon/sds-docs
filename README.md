@@ -61,7 +61,7 @@ In the `Linkage` resources, extensions are used to identify the partition. The `
 
 ![alt text](./diagram.png)
 
-1. Determine if the patient already exists within the SDS by querying for a `Linkage` resource. Use the `Patient` reference (e.g., Patient/123) as the value for the `item` parameter in the GET request.
+1. Determine if the patient already exists within the SDS by querying for a `Linkage` resource. Use the `Patient` reference (e.g., Patient/123) for the authorized patient as the value for the `item` parameter in the GET request.
 ###### Example:
 GET http://localhost:8080/fhir/Linkage?item=Patient/123
 |Header|Value|Notes|
