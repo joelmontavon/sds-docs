@@ -1,9 +1,9 @@
 ## Design
 The SDS is built upon a HAPI FHIR server (version 6.10.1) with a PostgreSQL database serving as its backend. Below is a breakdown of the key design choices:
 
-- **Partitioning**: The SDS manages the creation of local and foreign paritions as well as `Linkage` resources. 
-  - The *local* partition stores `Patient`, `Linkage`, `RelatedPerson`, and other resources, such as `Goal` and `QuestionnaireResponse` resources, associated with Patient-Reported Outcomes (PROs).
-  - The SDS creates a *foreign* parition for each third-party FHIR endpoint.
+- **Partitioning**: The SDS manages the creation of local and foreign partitions as well as `Linkage` resources. 
+  - The ***local*** partition stores `Patient`, `Linkage`, `RelatedPerson`, and other resources, such as `Goal` and `QuestionnaireResponse` resources, associated with Patient-Reported Outcomes (PROs).
+  - The SDS creates a separate ***foreign*** partition to store data from each third-party FHIR endpoint.
   - Resources from third-party FHIR endpoints that are ***not*** contained within the `Patient` compartment, such as `Medication` or `Practitioner` resources, are ***not*** stored.
 - **Access**: 
   - Access tokens are introspected to verify each user's identity.
