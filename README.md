@@ -87,7 +87,7 @@ Body:
 
 ### Data Access (Read/Write):
 
-Reading and writing data to the SDS requires separate calls to each partition as appropriate. Writing should be performed synchonously to prevent 409 errors that indicates a conflict between a client's request and the current state of a resource on the server.
+Reading and writing data to the SDS requires separate calls to each partition as appropriate. Writing should be performed synchonously to prevent 409 errors that indicate a conflict between a client's request and the current state of a resource on the server.
 
 #### Local Partition
 
