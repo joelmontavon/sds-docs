@@ -4,7 +4,7 @@ participant app as "Application"
 participant sds as "SDS"
 
 group Query for Linkage resources
-group Get Linkage resource for Patient reference in local parition
+group Get Linkage resource for Patient reference in local partition
     app -> sds: Query for Linkage resources (GET) using Patient reference for foreign partition
     sds -> app: Returns Bundle
     alt Bundle does not contain any entries
