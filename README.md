@@ -7,7 +7,8 @@ The SDS is built upon a HAPI FHIR server (version 6.10.1) with a PostgreSQL data
   - Resources from third-party FHIR endpoints that are ***not*** contained within the `Patient` compartment, such as `Medication` or `Practitioner` resources, are ***not*** stored.
 - **Access**: 
   - **Authentication**: Access tokens are introspected to verify each user's identity.
-  - **Authorization**: The SDS manages the creation of `Linkage` and `RelatedPerson` resources in the local partition. These resources determine authorization for specific resources. Providers are granted read-only access to all partitions, with provider status confirmed via token introspection.
+  - **Authorization**: The SDS manages the creation of `Linkage` and `RelatedPerson` resources in the local partition. These resources determine authorization for specific resources.
+  - Providers are granted read-only access to all partitions, with provider status confirmed via token introspection.
 
 ## Resources
 
