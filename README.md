@@ -166,7 +166,7 @@ DELETE http://localhost:8080/fhir/Patient/123?_cascade=delete
 
 #### Physical Delete:
 
-Physical deletes are completed using a POST request with the `$expunge` operation (e.g., POST http://localhost:8080/fhir/Patient/a210436a-f32b-4a6d-b924-efb01920b40e/$expunge). The request parameters should be included in the body of the request. The `X-Partition-Header` should only be used for the authorized foreign patient. The requests to the various partitions should be made synchronously, first to all the foreign partitions (except the foreign partition for the authorized patient) then the local partition and then the foreign partition for the autorized patient. Although these calls need to be made synchronously, the `$expunge` operation occurs asynchronously and does not return a response. 
+Physical deletes are completed using a POST request with the `$expunge` operation (e.g., POST http://localhost:8080/fhir/Patient/a210436a-f32b-4a6d-b924-efb01920b40e/$expunge). The request parameters should be included in the body of the request. The `X-Partition-Name` header should only be used for the authorized foreign patient. The requests to the various partitions should be made synchronously, first to all the foreign partitions (except the foreign partition for the authorized patient) then the local partition and then the foreign partition for the autorized patient. Although these calls need to be made synchronously, the `$expunge` operation occurs asynchronously and does not return a response. 
 
 ##### Example:
 POST http://localhost:8080/fhir/Patient/123/$expunge
