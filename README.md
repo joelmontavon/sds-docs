@@ -55,13 +55,13 @@ The SDS is built upon a HAPI FHIR server (version 6.10.1) with a PostgreSQL data
 
 ## API Calls
 
-### 1. Query Linkage Resources
+### Query Linkage Resources
 
 ##### Process Flow
 
 ![alt text](./diagram.png)
 
-Determine if the patient already exists within the SDS by querying for a `Linkage` resource. Use the `Patient` reference (e.g., Patient/123) as the value for the `item` parameter in the GET request.
+1. Determine if the patient already exists within the SDS by querying for a `Linkage` resource. Use the `Patient` reference (e.g., Patient/123) as the value for the `item` parameter in the GET request.
 ###### Example:
 GET http://localhost:8080/fhir/Linkage?item=Patient/123
 |Header|Value|Notes|
@@ -69,7 +69,7 @@ GET http://localhost:8080/fhir/Linkage?item=Patient/123
 |Accept|application/fhir+json||
 |Authorization|Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhY3RpdmUiOnRydWUsInNjb3BlIjoicGF0aWVudC8qIG9wZW5pZCBmaGlyVXNlciIsInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5vcmcvZmhpci9QYXRpZW50LzEyMyJ9.gPkk0A4N2I4mb9RmzXmyutCsyzVsEWdYjrC4MBWjaBRrVV2nQucbTEqwgaxUMMThlbe8s3V7VDVsHhzzjCq-2Z0nB9BGXmMaVe7e4zFVA41DKfuM50BSsC1CcEjXVZ_r6T7Y1vAij-y3N_LZIV-cYzs8HA4ue6m3FuaJLzQwo6KysnjdolM2NDInpHZPoBXZ_1e-Z2L34KDT4G9Sx2Uu7p3kpJmKRygSQgiJEnGHi1slRDTyMtJF7SzlIIZ6Oh4-y65oL3lhSIc7nzYek1teAR7LNAQq5867bFbb5g1vDhA4LuUDFLBA6zxY5gsD45fe8R31Dim7ILOEUIMtFEqGjA|The `sub` claim within the token matches the patient ID used in the `item` parameter|
 
-If the Linkage query returns a `Bundle` without any entries, the patient doesn't exist in the SDS and needs to be created. Use a POST request to create the `Patient` resource.
+2. If the Linkage query returns a `Bundle` without any entries, the patient doesn't exist in the SDS and needs to be created. Use a POST request to create the `Patient` resource.
 ##### Example:
 POST http://localhost:8080/fhir/Patient
 |Header|Value|Notes|
@@ -79,9 +79,9 @@ POST http://localhost:8080/fhir/Patient
 
 Include the a minimal `Patient` resource (e.g., {“resourceType”:”Patient”}) in the body of the request. This resource should not include the `id`. The request will create an empty `Patient` resource, or stub, in the foreign partition. After creating the `Patient` resource, re-query for the `Linkage` resource as described above.
 
-To get the `Linkage` resources for all of a patient's partitions, first query for the `Linkage` resource for the authorized patient in the foreign partition. From the `Linkage` resource returned, identify the `Patient` reference for the local partition (with the `item` with `type` of "source" and `valueUrl` of "SDS-LOCAL"). Then, using the `Patient` reference in the local partition, query for the `Linkage` resources in the local partition.
+3. To get the `Linkage` resources for all of a patient's partitions, first query for the `Linkage` resource for the authorized patient in the foreign partition. From the `Linkage` resource returned, identify the `Patient` reference for the local partition (with the `item` with `type` of "source" and `valueUrl` of "SDS-LOCAL"). Then, using the `Patient` reference in the local partition, query for the `Linkage` resources in the local partition.
 
-### 2. Data Access (Read/Write):
+### Data Access (Read/Write):
 
 Reading and writing data to the SDS requires separate calls to each partition as appropriate. Writing should be performed synchonously to prevent 409 errors that indicates a conflict between a client's request and the current state of a resource on the server.
 
@@ -145,7 +145,7 @@ Body:
 }
 ```
 
-### 3. Delete:
+### Delete:
 
 The SDS supports both logical and physical delete operations. The logical delete operations are performed synchronously while physical delete operations are performed asynchronously. Depending on application requirements, it may be useful to first perform a logical and then a physical delete.
 
