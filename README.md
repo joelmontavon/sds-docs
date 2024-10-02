@@ -89,7 +89,7 @@ Body:
 
 Reading and writing data to the SDS requires separate calls to each partition as appropriate. Writing should be performed synchonously to prevent 409 errors that indicates a conflict between a client's request and the current state of a resource on the server.
 
-Local Partition:
+#### Local Partition
 
 To read or write to the local partition, identify the `Patient` reference for the local partition from the `Linkage` resource as described above. Include the `Patient` reference for the local partition as a query parameter for a GET request (e.g., GET http://localhost:8080/fhir/Observation?patient=Patient/a210436a-f32b-4a6d-b924-efb01920b40e) or in the request body for a POST or PUT request. Always include the `Authorization` header in the request. And, for GET requests, include the `Accept` header. For POST requests, include the `Content-Type` header and the JSON resource body. These requests should never include the `X-Partition-Name` header.
 ###### Example:
@@ -99,7 +99,7 @@ GET http://localhost:8080/fhir/Linkage?item=Patient/a210436a-f32b-4a6d-b924-efb0
 |Accept|application/fhir+json||
 |Authorization|Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhY3RpdmUiOnRydWUsInNjb3BlIjoicGF0aWVudC8qIG9wZW5pZCBmaGlyVXNlciIsInN1YiI6Imh0dHBzOi8vZXhhbXBsZS5vcmcvZmhpci9QYXRpZW50LzEyMyJ9.gPkk0A4N2I4mb9RmzXmyutCsyzVsEWdYjrC4MBWjaBRrVV2nQucbTEqwgaxUMMThlbe8s3V7VDVsHhzzjCq-2Z0nB9BGXmMaVe7e4zFVA41DKfuM50BSsC1CcEjXVZ_r6T7Y1vAij-y3N_LZIV-cYzs8HA4ue6m3FuaJLzQwo6KysnjdolM2NDInpHZPoBXZ_1e-Z2L34KDT4G9Sx2Uu7p3kpJmKRygSQgiJEnGHi1slRDTyMtJF7SzlIIZ6Oh4-y65oL3lhSIc7nzYek1teAR7LNAQq5867bFbb5g1vDhA4LuUDFLBA6zxY5gsD45fe8R31Dim7ILOEUIMtFEqGjA|The `sub` claim within the token matches the patient ID used in the `item` parameter|
 
-Foreign Partition:
+#### Foreign Partition
 
 To read or write to the foreign partitions, use the appropriate `Patient` reference and X-Partition-Header to specify the partition in the request (e.g., X-Partition-Name: https://example.org/fhir). To create or update resources in the foreign partitions, always use a PUT request.
 ###### Example:
