@@ -1,0 +1,67 @@
+@startuml
+
+participant app as "Application"
+participant sds as "SDS"
+
+group Query for Linkage resources
+group Get Linkage resource for Patient reference in local parition
+    app -> sds: Query for Linkage resources (GET) using Patient reference for foreign partition
+    sds -> app: Returns Bundle
+    alt Bundle does not contain any entries
+        app -> sds: Create Patient resource (POST) in local partition
+        sds -> app: Returns status 201
+        app -> sds: Re-query for Linkage resources (GET) using Patient reference for foreign partition
+        sds -> app: Returns Bundle
+    end alt
+end
+app <- app: Identify reference to\nPatient resource\nin local partition
+group Get Linkage resources for all paritions
+    app -> sds: Query for Linkage resources (GET) using Patient reference for local partition
+    sds -> app: Returns Bundle
+end
+end
+
+group API Requests
+group Read
+    loop for each partition in Linkage.item
+        app -> sds: Query for resources (GET)
+        sds -> app: Returns Bundle
+    end loop
+end
+group Write
+group Local partition
+    app -> sds: Create resources (POST)
+    sds -> app: Returns resources
+end
+group Foreign partition
+    app -> sds: Create resources (PUT)
+    sds -> app: Returns resources
+end
+end
+group Delete
+    opt Logical delete
+        loop for each partition in Linkage.item
+            app -> sds: Cascading delete (DELETE)
+            sds -> app: Returns ???
+        end loop
+    end opt
+    
+    group Physical delete
+        group Foreign partitions
+            loop for each partition in Linkage.item with type = 'Alternate'
+                app -> sds: Cascading $delete-expunge (POST)
+                sds -> app: Returns ???
+            end loop
+        end
+        group Local parition
+            app -> sds: Cascading $delete-expunge (POST)
+            sds -> app: Returns ???
+        end
+        group Local parition
+            app -> sds: Cascading $delete-expunge (POST)
+            sds -> app: Returns ???
+        end
+    end 
+end
+end
+@enduml
