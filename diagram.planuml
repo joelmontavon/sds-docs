@@ -15,7 +15,7 @@ group Get Linkage resource for Patient reference in local parition
     end alt
 end
 app <- app: Identify reference to\nPatient resource\nin local partition
-group Get Linkage resources for all paritions
+group Get Linkage resources for all partitions
     app -> sds: Query for Linkage resources (GET) using Patient reference for local partition
     sds -> app: Returns Bundle
 end
