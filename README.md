@@ -2,18 +2,18 @@
 The SDS is built upon a HAPI FHIR server (version 6.10.1) with a PostgreSQL database serving as its backend. Below is a breakdown of the key design choices:
 
 - **Partitioning**: The SDS manages the creation of local and foreign paritions as well as `Linkage` resources. 
-  - **Local**: The local partition stores `Patient`, `Linkage`, `RelatedPerson`, and other resources, such as `Goal` and `QuestionnaireResponse` resources, associated with Patient-Reported Outcomes (PROs).
-  - **Foreign**: The SDS creates a foreign parition for each third-party FHIR endpoint.
+  - The *local* partition stores `Patient`, `Linkage`, `RelatedPerson`, and other resources, such as `Goal` and `QuestionnaireResponse` resources, associated with Patient-Reported Outcomes (PROs).
+  - The SDS creates a *foreign* parition for each third-party FHIR endpoint.
   - Resources from third-party FHIR endpoints that are ***not*** contained within the `Patient` compartment, such as `Medication` or `Practitioner` resources, are ***not*** stored.
 - **Access**: 
-  - **Authentication**: Access tokens are introspected to verify each user's identity.
-  - **Authorization**: The SDS manages the creation of `Linkage` and `RelatedPerson` resources in the local partition. These resources determine authorization for specific resources.
+  - Access tokens are introspected to verify each user's identity.
+  - The SDS manages the creation of `Linkage` and `RelatedPerson` resources in the local partition. These resources determine authorization for specific resources.
   - Providers are granted read-only access to all partitions, with provider status confirmed via token introspection.
 
 ## Resources
 
 ### Extending the Linkage Resource
-`Linkage` resources use extensions to identify the partition for each reference. From the `Linkage` resource, the `item` with a type of "source" is used for reading from and writing to the local partition. In the  example below, the `item` with `type` of "source" and `valueUrl` of "SDS-LOCAL" refers to the local partition, while the `item` with `type` of "alternate" and `vauleUrl` of "https://example.org/fhir" refers to the foreign partition.
+`Linkage` resources use extensions to identify the partition for each `reference`. From the `Linkage` resource, the `item` with a type of "source" is used for reading from and writing to the local partition. In the  example below, the `item` with `type` of "source" and `valueUrl` of "SDS-LOCAL" refers to the local partition, while the `item` with `type` of "alternate" and `vauleUrl` of "https://example.org/fhir" refers to the foreign partition.
 
 ##### Example
 ```json
