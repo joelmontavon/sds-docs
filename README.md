@@ -60,7 +60,7 @@ In the above example, the `item` with `type` of "source" and `valueUrl` of "SDS-
 
 ##### Process Flow
 
-![alt text](//www.plantuml.com/plantuml/png/jPBFJiCm38VlUGfhft6O11mdXFW3cf2G61l7NQBMgoA24sBdqBV7wIgjb0qum25ggph-Fl_aAnQR9BzvOwA-kCf5Im8sHh0Ca-iOlQkik42JJmLSSrUmlbjFZ6bIo16UCwOMjY71ewDNso0av91JXTnNB52-_EikB1M1991mYmcfGd04FbJMWr9TuHi0wBncbuK-_mu7qyNzombaTjICU_T4FUWQWZBKlhysBlqLCuSLIax4S9EfzhZ3U-a_eGwAeI1G1HAhjfPQK4noo5tjMFSseHKSsFJZJvTFQtKTpZiGEYR5OYKpd9-U7OIjSFR-3_7y8YAakiHaz6cAqSLiL_fGAyHjsm57meR6SMpeG137buUBgFBsQy9_l2TZbnyYqB7B-G00)
+![alt text](./diagram.png)
 
 Determine if the patient already exists within the SDS by querying for a `Linkage` resource. Use the `Patient` reference (e.g., Patient/123) as the value for the `item` parameter in the GET request.
 ###### Example:
