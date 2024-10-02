@@ -101,7 +101,7 @@ GET http://localhost:8080/fhir/Linkage?item=Patient/a210436a-f32b-4a6d-b924-efb0
 
 #### Foreign Partition
 
-To read or write to the foreign partitions, use the appropriate `Patient` reference and X-Partition-Header to specify the partition in the request (e.g., X-Partition-Name: https://example.org/fhir). To create or update resources in the foreign partitions, always use a PUT request.
+To read or write to the foreign partitions, use the appropriate `Patient` reference and `X-Partition-Name` header to specify the partition in the request (e.g., X-Partition-Name: https://example.org/fhir). To create or update resources in the foreign partitions, always use a PUT request.
 ###### Example:
 PUT http://localhost:8080/fhir/Patient/456
 |Header|Value|Notes|
