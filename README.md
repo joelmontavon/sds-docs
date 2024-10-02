@@ -182,12 +182,16 @@ Body:
     "resourceType": "Parameters",
     "parameter": [
         {
+            "name": "limit",
+            "valueBoolean": 999999
+        },
+        {
             "name": "expungeDeletedResources",
             "valueBoolean": true
         },
         {
-            "name": "_cascade",
-            "valueString": "delete"
+            "name": "expungePreviousVersion",
+            "valueString": true
         }
     ]
 }
